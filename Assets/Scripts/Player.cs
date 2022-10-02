@@ -6,12 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 3.5f;
     [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private GameObject tripleShot;
     [SerializeField] private float fireRate = 0.5f;
-
-
     [SerializeField] private int lives = 3;
 
     private float canFire = -1f;
+    [SerializeField] public bool tripleShotActive = false;
+
 
     private SpawnManager spawnManager;
 
@@ -24,7 +25,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         calculateMovement();
-
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > canFire)
         {
             Fire();
@@ -34,8 +34,22 @@ public class Player : MonoBehaviour
     private void Fire()
     {
         canFire = Time.time + fireRate;
-        Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y * 2.1f, 0), Quaternion.identity);
+        if (tripleShotActive == true)
+        {
+            Instantiate(tripleShot, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y * 2.1f, 0), Quaternion.identity);
+        }
     }
+    // if press space key
+    // if triple shot is active == true
+    // fires triple shot
+    //else
+    // fire once
+
+    // Instanciate 3 lasers (Triple shot)
 
     public void calculateMovement()
     {
