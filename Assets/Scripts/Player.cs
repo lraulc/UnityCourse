@@ -7,13 +7,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 3.5f;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float fireRate = 0.5f;
+
+
+    [SerializeField] private int lives = 3;
+
     private float canFire = -1f;
+
+    private SpawnManager spawnManager;
 
     void Start()
     {
-        // Take the current position = new position(0,0,0)
-        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (spawnManager == null) Debug.LogError("Spawn Manager not found = NULL");
     }
 
     void Update()
@@ -29,13 +34,13 @@ public class Player : MonoBehaviour
     private void Fire()
     {
         canFire = Time.time + fireRate;
-        Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0), Quaternion.identity);
+        Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y * 2.1f, 0), Quaternion.identity);
     }
 
     public void calculateMovement()
     {
         float horizontalLimit = 9.4f;
-        float verticalLimit = -4.4f;
+        float verticalLimit = -4.0f;
 
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -60,5 +65,16 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(horizontalLimit, transform.position.y, 0);
         }
 
+    }
+
+    public void Damage()
+    {
+        lives -= 1;
+        if (lives <= 0)
+        {
+            spawnManager.OnPlayerDeath();
+            print("You lose");
+            Destroy(this.gameObject);
+        }
     }
 }
