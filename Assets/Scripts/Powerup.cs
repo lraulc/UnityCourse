@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    [SerializeField] Player player;
     [SerializeField] private float moveSpeed = -3.0f;
     private float verticalLimit = 7.0f;
 
@@ -33,8 +32,16 @@ public class Powerup : MonoBehaviour
         if (other.tag == "Player")
         {
             print("Powerup Collected!");
-            player.tripleShotActive = true;
-            Destroy(this.gameObject);
+            Player player = other.gameObject.GetComponent<Player>();
+            if (player != null)
+            {
+                player.TripleShotActive();
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                print("No 'Player' script added to 'Powerup'");
+            }
         }
     }
 }

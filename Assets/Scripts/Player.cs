@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int lives = 3;
 
     private float canFire = -1f;
-    [SerializeField] public bool tripleShotActive = false;
+    [SerializeField] public bool isTripleShotActive = false;
 
 
     private SpawnManager spawnManager;
@@ -34,9 +34,9 @@ public class Player : MonoBehaviour
     private void Fire()
     {
         canFire = Time.time + fireRate;
-        if (tripleShotActive == true)
+        if (isTripleShotActive == true)
         {
-            Instantiate(tripleShot, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            Instantiate(tripleShot, transform.position, Quaternion.identity);
         }
         else
         {
@@ -83,5 +83,16 @@ public class Player : MonoBehaviour
             print("You lose");
             Destroy(gameObject);
         }
+    }
+
+    public void TripleShotActive()
+    {
+        isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+    IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isTripleShotActive = false;
     }
 }
