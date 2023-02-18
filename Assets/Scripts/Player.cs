@@ -43,13 +43,6 @@ public class Player : MonoBehaviour
             Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y * 2.1f, 0), Quaternion.identity);
         }
     }
-    // if press space key
-    // if triple shot is active == true
-    // fires triple shot
-    //else
-    // fire once
-
-    // Instanciate 3 lasers (Triple shot)
 
     public void calculateMovement()
     {
@@ -66,7 +59,7 @@ public class Player : MonoBehaviour
 
         // Vertical Bounds
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, verticalLimit, 0), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, verticalLimit, -verticalLimit), 0);
 
         // Horizontal clip
 
@@ -88,7 +81,7 @@ public class Player : MonoBehaviour
         {
             spawnManager.OnPlayerDeath();
             print("You lose");
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
