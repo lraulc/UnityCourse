@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
         // Vertical Bounds
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, verticalLimit, -verticalLimit), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, verticalLimit, 0.0f), 0);
 
         // Horizontal clip
 

@@ -21,7 +21,7 @@ public class Powerup : MonoBehaviour
 
     void outOfBounds()
     {
-        if (transform.position.y >= verticalLimit)
+        if (transform.position.y <= -verticalLimit)
         {
             Destroy(this.gameObject);
         }

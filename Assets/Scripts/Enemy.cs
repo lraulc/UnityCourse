@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     private float vertLimit = -5.8f;
     private float horLimit = -8.5f;
 
-
     private void Update()
     {
         movement();
@@ -17,12 +16,6 @@ public class Enemy : MonoBehaviour
     float RandomNum()
     {
         return Random.Range(horLimit, -horLimit);
-    }
-
-    public GameObject Respawn(Transform parent)
-    {
-        Instantiate(this.gameObject, new Vector3(RandomNum(), -vertLimit, 0), Quaternion.identity, parent);
-        return this.gameObject;
     }
 
     void movement()
@@ -53,4 +46,6 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+
 }
