@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private GameObject tripleShotPowerupPrefab;
     [SerializeField] private GameObject enemyContainer;
-    [SerializeField] private float spawnRate = 1;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private float enemySpawnRate = 1;
+    [SerializeField] private GameObject tripleShotPowerupPrefab;
+    [SerializeField] private GameObject speedBoostPowerupPrefab;
 
     private bool stopSpawning = false;
 
@@ -16,21 +17,17 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
-    }
-
-    public float randomNum()
-    {
-        return Random.Range(-7.5f, 7.5f);
+        StartCoroutine(SpawnSpeedBoostRoutine());
     }
 
     public GameObject Respawn(GameObject respawnObject)
     {
-        Instantiate(respawnObject, new Vector3(randomNum(), 6.5f, 0), Quaternion.identity);
+        Instantiate(respawnObject, new Vector3(Random.Range(-7.5f, 7.5f), 6.5f, 0), Quaternion.identity);
         return this.gameObject;
     }
     public GameObject Respawn(GameObject respawnObject, Transform parent)
     {
-        Instantiate(respawnObject, new Vector3(randomNum(), 6.5f, 0), Quaternion.identity, parent);
+        Instantiate(respawnObject, new Vector3(Random.Range(-7.5f, 7.5f), 6.5f, 0), Quaternion.identity, parent);
         return this.gameObject;
     }
 
@@ -42,7 +39,7 @@ public class SpawnManager : MonoBehaviour
             if (enemy != null)
             {
                 Respawn(enemy, enemyContainer.transform);
-                yield return new WaitForSeconds(spawnRate);
+                yield return new WaitForSeconds(enemySpawnRate);
             }
         }
     }
@@ -53,6 +50,15 @@ public class SpawnManager : MonoBehaviour
         {
             Respawn(tripleShotPowerupPrefab);
             yield return new WaitForSeconds(Random.Range(10, 16));
+        }
+    }
+
+    IEnumerator SpawnSpeedBoostRoutine()
+    {
+        while (stopSpawning == false)
+        {
+            Respawn(speedBoostPowerupPrefab);
+            yield return new WaitForSeconds(Random.Range(1, 3));
         }
     }
 
