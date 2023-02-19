@@ -13,19 +13,26 @@ public class Player : MonoBehaviour
     private float movementSpeed = 10.0f;
     private float fireRate = 0.15f;
 
+#pragma warning disable
     private bool isTripleShotActive = false;
-    private bool isSpeedBoostActive = false;
+    private bool isBoostSpeedActive = false;
     private bool isShieldActive = false;
+#pragma warning restore
 
+    [SerializeField] private int score = 0;
 
     private float canFire = -1f;
 
     private SpawnManager spawnManager;
+    private UIManager uimanager;
 
     void Start()
     {
+        uimanager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if (uimanager == null) Debug.LogError("UI Manager = NULL");
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (spawnManager == null) Debug.LogError("Spawn Manager not found = NULL");
+        isBoostSpeedActive = false;
     }
 
     void Update()
@@ -82,15 +89,16 @@ public class Player : MonoBehaviour
 
     public void SpeedBoostActive()
     {
-        isSpeedBoostActive = true;
+        isBoostSpeedActive = true;
         movementSpeed *= movementMultiplier;
         StartCoroutine(SpeedBoostRoutine());
     }
 
     IEnumerator SpeedBoostRoutine()
     {
+        // SpeedBoost Duration
         yield return new WaitForSeconds(3.0f);
-        isSpeedBoostActive = false;
+        isBoostSpeedActive = false;
         movementSpeed /= movementMultiplier;
     }
 
@@ -104,6 +112,8 @@ public class Player : MonoBehaviour
         }
 
         lives -= 1;
+        uimanager.UpdateLives(lives);
+
         if (lives <= 0)
         {
             spawnManager.OnPlayerDeath();
@@ -127,5 +137,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         isTripleShotActive = false;
+    }
+
+    public void addScore(int points)
+    {
+        score += points;
+        uimanager.updateScoreText(score);
     }
 }
