@@ -38,7 +38,6 @@ public class Powerup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            print("Powerup Collected!");
             Player player = other.gameObject.GetComponent<Player>();
             if (player != null)
             {
@@ -49,11 +48,12 @@ public class Powerup : MonoBehaviour
                         Destroy(this.gameObject);
                         break;
                     case 1:
-                        print("Speed boost!");
+                        player.SpeedBoostActive();
                         Destroy(this.gameObject);
                         break;
                     case 2:
                         print("Shields Collected");
+                        player.ShieldActive();
                         Destroy(this.gameObject);
                         break;
                     default:

@@ -1,18 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 3.5f;
+    [SerializeField] private int lives = 3;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject tripleShot;
-    [SerializeField] private float fireRate = 0.5f;
-    [SerializeField] private int lives = 3;
+    [SerializeField] private GameObject playerShield;
+
+    [SerializeField] private float movementMultiplier = 2.0f;
+    private float movementSpeed = 10.0f;
+    private float fireRate = 0.15f;
+
+    private bool isTripleShotActive = false;
+    private bool isSpeedBoostActive = false;
+    private bool isShieldActive = false;
+
 
     private float canFire = -1f;
-    [SerializeField] public bool isTripleShotActive = false;
-
 
     private SpawnManager spawnManager;
 
@@ -55,6 +61,7 @@ public class Player : MonoBehaviour
 
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
         transform.Translate(direction * movementSpeed * Time.deltaTime);
 
         // Vertical Bounds
@@ -71,11 +78,31 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(horizontalLimit, transform.position.y, 0);
         }
+    }
 
+    public void SpeedBoostActive()
+    {
+        isSpeedBoostActive = true;
+        movementSpeed *= movementMultiplier;
+        StartCoroutine(SpeedBoostRoutine());
+    }
+
+    IEnumerator SpeedBoostRoutine()
+    {
+        yield return new WaitForSeconds(3.0f);
+        isSpeedBoostActive = false;
+        movementSpeed /= movementMultiplier;
     }
 
     public void Damage()
     {
+        if (isShieldActive == true)
+        {
+            isShieldActive = false;
+            playerShield.SetActive(false);
+            return;
+        }
+
         lives -= 1;
         if (lives <= 0)
         {
@@ -83,6 +110,12 @@ public class Player : MonoBehaviour
             print("You lose");
             Destroy(gameObject);
         }
+    }
+
+    public void ShieldActive()
+    {
+        isShieldActive = true;
+        playerShield.SetActive(true);
     }
 
     public void TripleShotActive()

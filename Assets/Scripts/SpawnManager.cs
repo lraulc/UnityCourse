@@ -7,8 +7,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyContainer;
     [SerializeField] private GameObject enemy;
     [SerializeField] private float enemySpawnRate = 1;
-    [SerializeField] private GameObject tripleShotPowerupPrefab;
-    [SerializeField] private GameObject speedBoostPowerupPrefab;
+
+    [SerializeField] private GameObject[] powerups;
 
     private bool stopSpawning = false;
 
@@ -17,7 +17,6 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
-        StartCoroutine(SpawnSpeedBoostRoutine());
     }
 
     public GameObject Respawn(GameObject respawnObject)
@@ -48,17 +47,9 @@ public class SpawnManager : MonoBehaviour
     {
         while (stopSpawning == false)
         {
-            Respawn(tripleShotPowerupPrefab);
-            yield return new WaitForSeconds(Random.Range(10, 16));
-        }
-    }
-
-    IEnumerator SpawnSpeedBoostRoutine()
-    {
-        while (stopSpawning == false)
-        {
-            Respawn(speedBoostPowerupPrefab);
-            yield return new WaitForSeconds(Random.Range(1, 3));
+            int randomPowerup = Random.Range(0, powerups.Length);
+            Respawn(powerups[randomPowerup]);
+            yield return new WaitForSeconds(Random.Range(5, 10));
         }
     }
 
