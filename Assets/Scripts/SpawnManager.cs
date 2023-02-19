@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         return this.gameObject;
     }
 
-    // Spawn new enemy every 5 seconds
+    // Spawn new enemy every 5 seconds - Spawn Rate variable used to define spawn speed
     IEnumerator SpawnEnemyRoutine()
     {
         while (stopSpawning == false)
