@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
         if (lives <= 0)
         {
             spawnManager.OnPlayerDeath();
+            uimanager.GameOverScreen();
             print("You lose");
             Destroy(gameObject);
         }
