@@ -52,7 +52,6 @@ public class Powerup : MonoBehaviour
                         Destroy(this.gameObject);
                         break;
                     case 2:
-                        print("Shields Collected");
                         player.ShieldActive();
                         Destroy(this.gameObject);
                         break;

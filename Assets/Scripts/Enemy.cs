@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private float vertLimit = -5.8f;
     private float horLimit = -8.5f;
 
-    Collider2D collider;
+    Collider2D enemyCollider;
 
     private void Start()
     {
@@ -23,8 +23,8 @@ public class Enemy : MonoBehaviour
         if (animator == null) { Debug.LogError("Animator is NULL"); }
 
 
-        collider = GetComponent<Collider2D>();
-        if (collider == null) { Debug.Log("No Collider Set = Null"); }
+        enemyCollider = GetComponent<Collider2D>();
+        if (enemyCollider == null) { Debug.LogError("No Collider Set = Null"); }
     }
 
     private void Update()
@@ -55,8 +55,8 @@ public class Enemy : MonoBehaviour
             {
                 player.addScore(10);
             }
-            collider.enabled = false;
-            speed = 0;
+            enemyCollider.enabled = false;
+            // speed = 0;
             triggerDestroyAnim();
             Destroy(other.gameObject); // Destruye laser cuando colisiona
             Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona con laser
@@ -69,8 +69,8 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            collider.enabled = false;
-            speed = 0;
+            enemyCollider.enabled = false;
+            // speed = 0;
             triggerDestroyAnim();
             Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona
         }
