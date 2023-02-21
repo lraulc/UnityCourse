@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _speed = 4.0f;
+    [SerializeField] private float speed = 4.0f;
+
+    Animator animator;
+
     private Player player;
     private float vertLimit = -5.8f;
     private float horLimit = -8.5f;
+
+    Collider2D collider;
 
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         if (player == null) { Debug.LogError("No Player Found = NULL"); }
-    }
 
+        animator = GetComponent<Animator>();
+        if (animator == null) { Debug.LogError("Animator is NULL"); }
+
+
+        collider = GetComponent<Collider2D>();
+        if (collider == null) { Debug.Log("No Collider Set = Null"); }
+    }
 
     private void Update()
     {
@@ -28,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     void movement()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * _speed);
+        transform.Translate(Vector3.down * Time.deltaTime * speed);
 
         if (transform.position.y <= vertLimit)
         {
@@ -40,14 +51,15 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Laser")
         {
-            Destroy(this.gameObject);
-
             if (player != null)
             {
                 player.addScore(10);
             }
-
-            Destroy(other.gameObject);
+            collider.enabled = false;
+            speed = 0;
+            triggerDestroyAnim();
+            Destroy(other.gameObject); // Destruye laser cuando colisiona
+            Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona con laser
         }
         if (other.tag == "Player")
         {
@@ -57,9 +69,15 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            collider.enabled = false;
+            speed = 0;
+            triggerDestroyAnim();
+            Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona
         }
     }
 
-
+    void triggerDestroyAnim()
+    {
+        animator.SetTrigger("OnEnemyDeath");
+    }
 }

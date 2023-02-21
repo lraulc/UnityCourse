@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class gamemanager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private bool isGameOver = false;
 

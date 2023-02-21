@@ -13,13 +13,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text restartLevel_text;
     [SerializeField] private Sprite[] liveSprites;
 
-    private gamemanager game_Manager;
+    private GameManager game_Manager;
 
     private void Start()
     {
         if (gameover_text.enabled) gameover_text.enabled = false;
         if (restartLevel_text.enabled) restartLevel_text.enabled = false;
-        game_Manager = GameObject.Find("Game_Manager").GetComponent<gamemanager>();
+        game_Manager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if (game_Manager == null) { Debug.LogError("Game manager is NULL"); }
         score_text.text = "Score: " + 0;
     }
