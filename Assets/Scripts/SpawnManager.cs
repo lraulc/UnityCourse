@@ -10,9 +10,6 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject[] powerups;
 
-
-
-
     private bool stopSpawning = false;
 
     // Start is called before the first frame update
@@ -60,7 +57,7 @@ public class SpawnManager : MonoBehaviour
         {
             int randomPowerup = Random.Range(0, powerups.Length);
             Respawn(powerups[randomPowerup]);
-            yield return new WaitForSeconds(Random.Range(5, 10));
+            yield return new WaitForSeconds(Random.Range(1, 2));
         }
     }
 

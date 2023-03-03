@@ -1505,9 +1505,17 @@ PrefabInstance:
       value: -83.528
       objectReference: {fileID: 0}
     - target: {fileID: 3666841299331564297, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
+      propertyPath: amplitude
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666841299331564297, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
       propertyPath: explosionAnim
       value: 
       objectReference: {fileID: 158712468601540566, guid: c8c725592679bbf4fb270ca425ad574d, type: 3}
+    - target: {fileID: 3666841299331564297, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
+      propertyPath: hoverDistance
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3976106054017989779, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
       propertyPath: m_Name
       value: Asteroid
@@ -1571,6 +1579,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4285626825034460936, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: laserColor.b
+      value: 0.4039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: laserColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: isShieldActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: maxPowerColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: maxPowerColor.g
+      value: 0.93516773
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: maxPowerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: speedBoostColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: speedBoostColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: speedBoostColor.r
+      value: 0.15496802
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: isBoostSpeedActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: isTripleShotActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: shieldPowerupColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: shieldPowerupColor.g
+      value: 0.7410011
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285626825034460937, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}
+      propertyPath: shieldPowerupColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8938864233549266502, guid: 46a5bb50a4de9429897558e62e00af2d, type: 3}

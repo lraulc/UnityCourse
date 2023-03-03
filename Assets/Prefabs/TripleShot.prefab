@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5643607381269888749}
+  - component: {fileID: 1668384748674099354}
   m_Layer: 0
   m_Name: TripleShot
   m_TagString: Laser
@@ -34,6 +35,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668384748674099354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384847132607602166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1cd1b871f4c1034eb08b308db377ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lasers:
+  - {fileID: 2868851642695877588}
+  - {fileID: 195683374050513242}
+  - {fileID: 1347448107945075461}
 --- !u!1001 &49180610367741312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +58,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5643607381269888749}
     m_Modifications:
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7410011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -91,6 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+--- !u!212 &2868851642695877588 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+  m_PrefabInstance: {fileID: 49180610367741312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2868851642695877589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
@@ -103,6 +133,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5643607381269888749}
     m_Modifications:
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7410011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -153,6 +191,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+--- !u!212 &195683374050513242 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+  m_PrefabInstance: {fileID: 2722909906970234638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &195683374050513243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
@@ -165,6 +208,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5643607381269888749}
     m_Modifications:
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7410011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -218,5 +269,10 @@ PrefabInstance:
 --- !u!4 &1347448107945075460 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2845866906884333141, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
+  m_PrefabInstance: {fileID: 3876917813578300753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1347448107945075461 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2845866906884333140, guid: 767295e8e9a0b4fd5bb7b947625bc5c1, type: 3}
   m_PrefabInstance: {fileID: 3876917813578300753}
   m_PrefabAsset: {fileID: 0}

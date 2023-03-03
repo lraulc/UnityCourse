@@ -9,16 +9,18 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject tripleShot;
     [SerializeField] private GameObject playerShield;
     [SerializeField] private GameObject playerThruster;
-    [SerializeField] private Color thrusterColor = new Color(1.0f, 1.0f, 1.0f);
+    [SerializeField] private Color speedBoostColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    [SerializeField] private Color shieldPowerupColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    [SerializeField] private Color maxPowerColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     [SerializeField] private float movementMultiplier = 2.0f;
     private float movementSpeed = 10.0f;
     private float fireRate = 0.15f;
 
 #pragma warning disable
-    private bool isTripleShotActive = false;
-    private bool isBoostSpeedActive = false;
-    private bool isShieldActive = false;
+    [SerializeField] private bool isTripleShotActive = false;
+    [SerializeField] private bool isBoostSpeedActive = false;
+    [SerializeField] private bool isShieldActive = false;
 #pragma warning restore
 
     [SerializeField] private int score = 0;
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
     public void SpeedBoostActive()
     {
         isBoostSpeedActive = true;
-        playerThruster.GetComponent<SpriteRenderer>().color = thrusterColor;
+        playerThruster.GetComponent<SpriteRenderer>().color = speedBoostColor;
         movementSpeed *= movementMultiplier;
         StartCoroutine(SpeedBoostRoutine());
     }
@@ -101,7 +103,7 @@ public class Player : MonoBehaviour
     {
         // SpeedBoost Duration
         yield return new WaitForSeconds(3.0f);
-        playerThruster.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
+        playerThruster.GetComponent<SpriteRenderer>().color = Color.white;
         isBoostSpeedActive = false;
         movementSpeed /= movementMultiplier;
     }
@@ -130,17 +132,41 @@ public class Player : MonoBehaviour
     {
         isShieldActive = true;
         playerShield.SetActive(true);
+
     }
 
     public void TripleShotActive()
     {
         isTripleShotActive = true;
+
+        if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == true)
+        {
+            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(maxPowerColor);
+        }
+        else if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == false)
+        {
+            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(speedBoostColor);
+        }
+        else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == true)
+        {
+            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(shieldPowerupColor);
+        }
+        else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == false)
+        {
+            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
+        }
+        else
+        {
+            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
+        }
+
         StartCoroutine(TripleShotPowerDownRoutine());
     }
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
         isTripleShotActive = false;
+        tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
     }
 
     public void addScore(int points)
