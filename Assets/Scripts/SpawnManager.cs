@@ -10,10 +10,17 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject[] powerups;
 
+
+
+
     private bool stopSpawning = false;
 
     // Start is called before the first frame update
     void Start()
+    {
+    }
+
+    public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
@@ -33,6 +40,8 @@ public class SpawnManager : MonoBehaviour
     // Spawn new enemy every 5 seconds - Spawn Rate variable used to define spawn speed
     IEnumerator SpawnEnemyRoutine()
     {
+        yield return new WaitForSeconds(3.0f);
+
         while (stopSpawning == false)
         {
             if (enemy != null)
@@ -45,6 +54,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
+        yield return new WaitForSeconds(3.0f);
+
         while (stopSpawning == false)
         {
             int randomPowerup = Random.Range(0, powerups.Length);

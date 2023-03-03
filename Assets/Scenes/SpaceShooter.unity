@@ -1504,6 +1504,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -83.528
       objectReference: {fileID: 0}
+    - target: {fileID: 3666841299331564297, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
+      propertyPath: explosionAnim
+      value: 
+      objectReference: {fileID: 158712468601540566, guid: c8c725592679bbf4fb270ca425ad574d, type: 3}
     - target: {fileID: 3976106054017989779, guid: c387d5f445c55cd429aecf68e3b4a053, type: 3}
       propertyPath: m_Name
       value: Asteroid

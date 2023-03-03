@@ -7,6 +7,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float rotationSpeed = 15.0f;
     [SerializeField] private GameObject explosionAnim;
 
+    SpawnManager _spawnManager;
 
     Collider2D asteroidCollider2D;
 
@@ -14,6 +15,9 @@ public class Asteroid : MonoBehaviour
     {
         if (explosionAnim == null) { Debug.LogError("No Explosion Prefab Assigned"); }
         asteroidCollider2D = GetComponent<Collider2D>();
+
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (_spawnManager == null) { Debug.LogError("No Spawn Manager found!"); }
     }
 
     private void Update()
@@ -32,9 +36,13 @@ public class Asteroid : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             asteroidCollider2D.enabled = false;
-            explosionAnim = Instantiate(explosionAnim, gameObject.transform.position, Quaternion.identity);
+
+            _spawnManager.StartSpawning();
+
+            Instantiate(explosionAnim, gameObject.transform.position, Quaternion.identity);
+            Destroy(other.gameObject); // Destroy Laser
             Destroy(this.gameObject); // Destroy Asteroid
-            Destroy(explosionAnim, 2.0f); // Destroy Explosion
+            // Destroy(explosionAnim, 2.0f); // Destroy Explosion
         }
     }
 }

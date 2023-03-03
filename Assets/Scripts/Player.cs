@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject tripleShot;
     [SerializeField] private GameObject playerShield;
+    [SerializeField] private GameObject playerThruster;
+    [SerializeField] private Color thrusterColor = new Color(1.0f, 1.0f, 1.0f);
 
     [SerializeField] private float movementMultiplier = 2.0f;
     private float movementSpeed = 10.0f;
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
     public void SpeedBoostActive()
     {
         isBoostSpeedActive = true;
+        playerThruster.GetComponent<SpriteRenderer>().color = thrusterColor;
         movementSpeed *= movementMultiplier;
         StartCoroutine(SpeedBoostRoutine());
     }
@@ -98,6 +101,7 @@ public class Player : MonoBehaviour
     {
         // SpeedBoost Duration
         yield return new WaitForSeconds(3.0f);
+        playerThruster.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         isBoostSpeedActive = false;
         movementSpeed /= movementMultiplier;
     }
