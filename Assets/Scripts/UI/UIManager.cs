@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image livesImg;
     [SerializeField] private TMP_Text gameover_text;
     [SerializeField] private TMP_Text restartLevel_text;
+    [SerializeField] private TMP_Text finalScore_text;
     [SerializeField] private Sprite[] liveSprites;
 
     private GameManager game_Manager;
@@ -22,6 +23,8 @@ public class UIManager : MonoBehaviour
         game_Manager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if (game_Manager == null) { Debug.LogError("Game manager is NULL"); }
         score_text.text = "Score: " + 0;
+        if (finalScore_text.enabled) finalScore_text.enabled = false;
+        finalScore_text.text = score_text.text;
     }
 
     public void updateScoreText(int playerScore)
@@ -44,7 +47,7 @@ public class UIManager : MonoBehaviour
     void GameOverSequence()
     {
         game_Manager.GameOver();
-        // gameover_text.enabled = true;
+        finalScore_text.enabled = true;
         restartLevel_text.enabled = true;
         StartCoroutine(GameOverFlickerAnim());
     }
