@@ -10,6 +10,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float amplitude = 1.0f;
 
     private Vector3 tempPosition;
+    private Vector3 startPosition;
 
     SpawnManager _spawnManager;
 
@@ -24,12 +25,15 @@ public class Asteroid : MonoBehaviour
         if (_spawnManager == null) { Debug.LogError("No Spawn Manager found!"); }
 
         tempPosition = gameObject.transform.position;
+        startPosition = transform.position;
+
+        print(tempPosition);
     }
 
     private void FixedUpdate()
     {
         Rotator();
-        StartCoroutine(hoverMovement());
+        hoverMovement();
     }
 
     private void Rotator()
@@ -37,10 +41,9 @@ public class Asteroid : MonoBehaviour
         transform.Rotate(new Vector3(0.0f, 0.0f, (1 * (rotationSpeed * Time.deltaTime))), Space.Self);
     }
 
-    IEnumerator hoverMovement()
+    private void hoverMovement()
     {
-        yield return new WaitForSeconds(0.2f);
-        tempPosition.y = Mathf.Sin(Time.time * hoverSpeed) * amplitude;
+        tempPosition.y = (Mathf.Sin(Time.time * hoverSpeed) * amplitude) + startPosition.y;
         transform.position = tempPosition;
     }
 
