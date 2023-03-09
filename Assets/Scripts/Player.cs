@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int lives = 3;
+    // [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int currentHealth = 0;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject tripleShot;
     [SerializeField] private GameObject playerShield;
@@ -27,6 +29,9 @@ public class Player : MonoBehaviour
 
     private float canFire = -1f;
 
+    /*
+    * Aditional Classes - Script Communications
+    */
     private SpawnManager spawnManager;
     private UIManager uimanager;
 
@@ -37,6 +42,10 @@ public class Player : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (spawnManager == null) Debug.LogError("Spawn Manager not found = NULL");
         isBoostSpeedActive = false;
+
+        currentHealth = lives;
+        uimanager.SetMaxHealth(lives);
+
     }
 
     void Update()
@@ -117,10 +126,11 @@ public class Player : MonoBehaviour
             return;
         }
 
-        lives -= 1;
-        uimanager.UpdateLives(lives);
+        currentHealth -= 1;
+        uimanager.SetHealth(currentHealth);
+        uimanager.UpdateLives(currentHealth);
 
-        if (lives <= 0)
+        if (currentHealth <= 0)
         {
             spawnManager.OnPlayerDeath();
             print("You lose");
@@ -139,26 +149,26 @@ public class Player : MonoBehaviour
     {
         isTripleShotActive = true;
 
-        if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == true)
-        {
-            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(maxPowerColor);
-        }
-        else if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == false)
-        {
-            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(speedBoostColor);
-        }
-        else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == true)
-        {
-            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(shieldPowerupColor);
-        }
-        else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == false)
-        {
-            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
-        }
-        else
-        {
-            tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
-        }
+        // if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == true)
+        // {
+        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(maxPowerColor);
+        // }
+        // else if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == false)
+        // {
+        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(speedBoostColor);
+        // }
+        // else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == true)
+        // {
+        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(shieldPowerupColor);
+        // }
+        // else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == false)
+        // {
+        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
+        // }
+        // else
+        // {
+        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
+        // }
 
         StartCoroutine(TripleShotPowerDownRoutine());
     }
