@@ -12,11 +12,6 @@ public class SpawnManager : MonoBehaviour
 
     private bool stopSpawning = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
@@ -57,7 +52,7 @@ public class SpawnManager : MonoBehaviour
         {
             int randomPowerup = Random.Range(0, powerups.Length);
             Respawn(powerups[randomPowerup]);
-            yield return new WaitForSeconds(Random.Range(1, 2));
+            yield return new WaitForSeconds(Random.Range(5, 15));
         }
     }
 

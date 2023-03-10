@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Color speedBoostColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     [SerializeField] private Color shieldPowerupColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     [SerializeField] private Color maxPowerColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    [SerializeField] private GameObject[] Engines;
 
     [SerializeField] private float movementMultiplier = 2.0f;
     private float movementSpeed = 10.0f;
@@ -28,12 +29,21 @@ public class Player : MonoBehaviour
     [SerializeField] private int score = 0;
 
     private float canFire = -1f;
+    private float randomEngine;
+
+    /*
+    * Shader Updates
+    */
+
+    private Material playerMaterial;
+    private int flickerSpeedID;
 
     /*
     * Aditional Classes - Script Communications
     */
     private SpawnManager spawnManager;
     private UIManager uimanager;
+
 
     void Start()
     {
@@ -46,6 +56,24 @@ public class Player : MonoBehaviour
         currentHealth = lives;
         uimanager.SetMaxHealth(lives);
 
+        randomEngine = Random.Range(0, 2);
+        // Turn off Engines on start
+        for (int i = 0; i < Engines.Length; i++)
+        {
+            if (Engines[i].activeSelf == true)
+            {
+                Engines[i].SetActive(false);
+            }
+        }
+
+        /*
+        * Setup Shader ID
+        */
+
+        playerMaterial = gameObject.GetComponent<SpriteRenderer>().material;
+        if (playerMaterial == null) { Debug.LogError("No Sprite Renderer found on Player"); }
+        flickerSpeedID = Shader.PropertyToID("_Speed");
+        playerMaterial.SetFloat(flickerSpeedID, 0);
     }
 
     void Update()
@@ -117,11 +145,27 @@ public class Player : MonoBehaviour
         movementSpeed /= movementMultiplier;
     }
 
+
+    private void EngineDamage()
+    {
+        if (randomEngine == 0)
+        {
+            Engines[0].SetActive(true);
+            randomEngine = 1;
+        }
+        else
+        {
+            Engines[1].SetActive(true);
+            randomEngine = 0;
+        }
+    }
+
     public void Damage()
     {
         if (isShieldActive == true)
         {
             isShieldActive = false;
+            uimanager.UpdateLineColor(isShieldActive);
             playerShield.SetActive(false);
             return;
         }
@@ -129,11 +173,16 @@ public class Player : MonoBehaviour
         currentHealth -= 1;
         uimanager.SetHealth(currentHealth);
         uimanager.UpdateLives(currentHealth);
+        EngineDamage();
+
+        if (currentHealth == 1)
+        {
+            playerMaterial.SetFloat(flickerSpeedID, 300);
+        }
 
         if (currentHealth <= 0)
         {
             spawnManager.OnPlayerDeath();
-            print("You lose");
             Destroy(gameObject);
         }
     }
@@ -142,34 +191,13 @@ public class Player : MonoBehaviour
     {
         isShieldActive = true;
         playerShield.SetActive(true);
+        uimanager.UpdateLineColor(isShieldActive);
 
     }
 
     public void TripleShotActive()
     {
         isTripleShotActive = true;
-
-        // if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == true)
-        // {
-        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(maxPowerColor);
-        // }
-        // else if (isTripleShotActive == true && isBoostSpeedActive == true && isShieldActive == false)
-        // {
-        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(speedBoostColor);
-        // }
-        // else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == true)
-        // {
-        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(shieldPowerupColor);
-        // }
-        // else if (isTripleShotActive == true && isBoostSpeedActive == false && isShieldActive == false)
-        // {
-        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
-        // }
-        // else
-        // {
-        //     tripleShot.GetComponent<TripleShotSettings>().ChangeLaserColor(Color.white);
-        // }
-
         StartCoroutine(TripleShotPowerDownRoutine());
     }
     IEnumerator TripleShotPowerDownRoutine()

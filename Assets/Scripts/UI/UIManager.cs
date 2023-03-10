@@ -16,14 +16,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] liveSprites;
 
     private GameManager game_Manager;
+
+
     Material healthMaterial;
-    Color startingHealthColor = Color.green;
+    [SerializeField] private Color warningColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    [SerializeField] private Color dangerColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    Color startingHealthColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    Color lineColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+
     int healthShaderID;
+    int lineShaderID;
 
     private void Awake()
     {
         healthMaterial = healthFill.material;
         healthShaderID = Shader.PropertyToID("_HealthColor");
+        lineShaderID = Shader.PropertyToID("_LineColor");
     }
 
     private void Start()
@@ -36,8 +46,12 @@ public class UIManager : MonoBehaviour
         if (finalScore_text.enabled) finalScore_text.enabled = false;
         finalScore_text.text = score_text.text;
 
-        // Set Starting Color
+        // Set Starting Health Color
+        startingHealthColor = healthMaterial.GetColor(healthShaderID);
         healthMaterial.SetColor(healthShaderID, startingHealthColor);
+        // Set Starting Line Color
+        lineColor = healthMaterial.GetColor(lineShaderID);
+        healthMaterial.SetColor(lineShaderID, lineColor);
     }
 
     public void updateScoreText(int playerScore)
@@ -45,6 +59,18 @@ public class UIManager : MonoBehaviour
         score_text.text = "Score: " + playerScore.ToString();
         finalScore_text.text = score_text.text;
 
+    }
+
+    public void UpdateLineColor(bool isShieldActive)
+    {
+        if (isShieldActive == true)
+        {
+            healthMaterial.SetColor(lineShaderID, Color.blue);
+        }
+        else
+        {
+            healthMaterial.SetColor(lineShaderID, Color.green);
+        }
     }
 
     public void UpdateLives(int currentLives)
@@ -57,21 +83,22 @@ public class UIManager : MonoBehaviour
 
         if (currentLives >= healthSlider.maxValue)
         {
-            healthMaterial.SetColor(healthShaderID, Color.green);
+            healthMaterial.SetColor(healthShaderID, startingHealthColor);
         }
 
-        if (currentLives == 5)
+        if (currentLives == 2)
         {
-            healthMaterial.SetColor(healthShaderID, Color.yellow);
+            healthMaterial.SetColor(healthShaderID, warningColor);
         }
 
-        if (currentLives == 3)
+        if (currentLives == 1)
         {
-            healthMaterial.SetColor(healthShaderID, Color.red);
+            healthMaterial.SetColor(healthShaderID, dangerColor);
         }
 
         if (currentLives <= 0)
         {
+            healthMaterial.SetColor(healthShaderID, startingHealthColor);
             GameOverSequence();
         }
     }
@@ -93,15 +120,6 @@ public class UIManager : MonoBehaviour
     public void SetHealth(int health)
     {
         healthSlider.value = health;
-
-        // if (healthSlider.value <= Mathf.Ceil(healthSlider.maxValue / 2))
-        // {
-        //     healthFill.color = Color.yellow;
-        // }
-        // if (healthSlider.value == 1)
-        // {
-        //     healthFill.color = Color.red;
-        // }
     }
 
     IEnumerator GameOverFlickerAnim()

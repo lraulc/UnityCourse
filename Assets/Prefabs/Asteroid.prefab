@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7fa5e297918b9844bad23bf1809697a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,6 +117,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 15
   explosionAnim: {fileID: 158712468601540566, guid: c8c725592679bbf4fb270ca425ad574d, type: 3}
+  hoverSpeed: 1
+  amplitude: 1
+  health: 3
 --- !u!50 &8438102789826370703
 Rigidbody2D:
   serializedVersion: 4
