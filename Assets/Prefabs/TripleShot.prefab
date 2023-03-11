@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5643607381269888749}
   - component: {fileID: 1668384748674099354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TripleShot
   m_TagString: Laser
   m_Icon: {fileID: 0}

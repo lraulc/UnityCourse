@@ -57,7 +57,8 @@ public class Player : MonoBehaviour
         uimanager.SetMaxHealth(lives);
 
         randomEngine = Random.Range(0, 2);
-        // Turn off Engines on start
+
+        // Turn off Engines (Sprites) on start
         for (int i = 0; i < Engines.Length; i++)
         {
             if (Engines[i].activeSelf == true)

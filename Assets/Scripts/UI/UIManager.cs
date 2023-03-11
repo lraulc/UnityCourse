@@ -23,7 +23,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Color dangerColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     Color startingHealthColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-    Color lineColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    private Color lineColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    [SerializeField] private Color shieldLineColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
 
     int healthShaderID;
@@ -65,19 +67,16 @@ public class UIManager : MonoBehaviour
     {
         if (isShieldActive == true)
         {
-            healthMaterial.SetColor(lineShaderID, Color.blue);
+            healthMaterial.SetColor(lineShaderID, shieldLineColor);
         }
         else
         {
-            healthMaterial.SetColor(lineShaderID, Color.green);
+            healthMaterial.SetColor(lineShaderID, lineColor);
         }
     }
 
     public void UpdateLives(int currentLives)
     {
-        //get display image sprite
-        // give it a new base on the current lives index
-        // livesImg.sprite = liveSprites[currentLives];
 
         healthSlider.value = currentLives;
 

@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour
                 player.addScore(10);
             }
             enemyCollider.enabled = false;
-            // speed = 0;
             triggerDestroyAnim();
             Destroy(other.gameObject); // Destruye laser cuando colisiona
             Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona con laser
@@ -64,13 +63,11 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Player")
         {
             // Damage the player
-            // Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
                 player.Damage();
             }
             enemyCollider.enabled = false;
-            // speed = 0;
             triggerDestroyAnim();
             Destroy(this.gameObject, 1.0f); // Destruye Enemy cuando colisiona
         }
