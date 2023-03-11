@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 4.0f;
 
     Animator animator;
+    AudioSource audioSource;
 
     private Player player;
     private float vertLimit = -5.8f;
@@ -25,6 +26,9 @@ public class Enemy : MonoBehaviour
 
         enemyCollider = GetComponent<Collider2D>();
         if (enemyCollider == null) { Debug.LogError("No Collider Set = Null"); }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) { Debug.LogError("No Audio Source Component"); }
     }
 
     private void Update()
@@ -76,5 +80,6 @@ public class Enemy : MonoBehaviour
     void triggerDestroyAnim()
     {
         animator.SetTrigger("OnEnemyDeath");
+        audioSource.Play();
     }
 }

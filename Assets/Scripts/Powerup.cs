@@ -7,14 +7,13 @@ public class Powerup : MonoBehaviour
     [SerializeField] private float moveSpeed = -3.0f;
     private float verticalLimit = 7.0f;
 
-
-
     [SerializeField] //ID for powerups -> 0 = tripleshot, 1 = speedpowerup, 2 = shield
     [Tooltip("ID for powerups\n0 = TripleShot\n1 = Speed Boost\n2 = Shield")]
     private int powerupID;
 
+    [SerializeField] private AudioClip powerupAudioClip;
 
-    // Update is called once per frame
+
     void Update()
     {
         move();
@@ -39,6 +38,9 @@ public class Powerup : MonoBehaviour
         if (other.tag == "Player")
         {
             Player player = other.gameObject.GetComponent<Player>();
+
+            AudioSource.PlayClipAtPoint(powerupAudioClip, this.gameObject.transform.position, 2.0f);
+
             if (player != null)
             {
                 switch (powerupID)

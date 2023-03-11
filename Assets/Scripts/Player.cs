@@ -44,6 +44,13 @@ public class Player : MonoBehaviour
     private SpawnManager spawnManager;
     private UIManager uimanager;
 
+    /*
+    * Audio variables
+    */
+
+    [SerializeField] private AudioClip laserAudio;
+    AudioSource audioSource;
+
 
     void Start()
     {
@@ -75,6 +82,11 @@ public class Player : MonoBehaviour
         if (playerMaterial == null) { Debug.LogError("No Sprite Renderer found on Player"); }
         flickerSpeedID = Shader.PropertyToID("_Speed");
         playerMaterial.SetFloat(flickerSpeedID, 0);
+
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = laserAudio;
+
     }
 
     void Update()
@@ -97,6 +109,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + transform.localScale.y * 2.1f, 0), Quaternion.identity);
         }
+        audioSource.PlayOneShot(laserAudio);
+
     }
 
     public void calculateMovement()

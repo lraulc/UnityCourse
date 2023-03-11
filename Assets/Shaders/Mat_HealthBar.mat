@@ -121,8 +121,8 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GradientContrast: {r: 0.95, g: 0.9, b: 0, a: 0}
-    - _HealthColor: {r: 0, g: 1, b: 0.030314205, a: 1}
-    - _LineColor: {r: 0.41388395, g: 1, b: 0, a: 1}
+    - _HealthColor: {r: 0.18813768, g: 1, b: 0, a: 1}
+    - _LineColor: {r: 0, g: 1, b: 0.6496899, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _Smoothstep: {r: 0.98, g: 0.97, b: 0, a: 0}
   m_BuildTextureStacks: []

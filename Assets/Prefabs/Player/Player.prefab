@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2679331251520571504}
   - component: {fileID: 8190002492463041253}
   - component: {fileID: 569710776590953746}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: playerShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,8 @@ GameObject:
   - component: {fileID: 4285626825034460938}
   - component: {fileID: 4285626825034460933}
   - component: {fileID: 4285626825034460937}
-  m_Layer: 6
+  - component: {fileID: 773561028}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -164,7 +165,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b618fe3155eaa4544927135548d42e60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -261,9 +262,9 @@ MonoBehaviour:
   tripleShot: {fileID: 384847132607602166, guid: ce377561e136f4b90b0154af8d8e2c60, type: 3}
   playerShield: {fileID: 1767222188965012531}
   playerThruster: {fileID: 6562072138372989408}
-  speedBoostColor: {r: 1, g: 1, b: 1, a: 1}
-  shieldPowerupColor: {r: 1, g: 1, b: 1, a: 1}
-  maxPowerColor: {r: 1, g: 1, b: 1, a: 1}
+  speedBoostColor: {r: 0.15496802, g: 1, b: 0, a: 1}
+  shieldPowerupColor: {r: 0, g: 0.7410011, b: 1, a: 1}
+  maxPowerColor: {r: 1, g: 0.93516773, b: 0, a: 1}
   Engines:
   - {fileID: 7756560775688267198}
   - {fileID: 9040041425814297000}
@@ -272,6 +273,103 @@ MonoBehaviour:
   isBoostSpeedActive: 0
   isShieldActive: 0
   score: 0
+  laserAudio: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+--- !u!82 &773561028
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285626825034460932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6562072138372989408
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +381,7 @@ GameObject:
   - component: {fileID: 3687359719671462835}
   - component: {fileID: 4040899530897409173}
   - component: {fileID: 90351838612744586}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,13 +486,13 @@ GameObject:
   - component: {fileID: 264158662991274477}
   - component: {fileID: 5346155678690479598}
   - component: {fileID: 5648739086423602733}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LeftEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &264158662991274477
 Transform:
   m_ObjectHideFlags: 0
@@ -450,7 +548,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1854220147
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -493,13 +591,13 @@ GameObject:
   - component: {fileID: 5711114161381689234}
   - component: {fileID: 8401831634955578681}
   - component: {fileID: 3497931638117929118}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RightEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5711114161381689234
 Transform:
   m_ObjectHideFlags: 0
@@ -555,7 +653,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1854220147
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
